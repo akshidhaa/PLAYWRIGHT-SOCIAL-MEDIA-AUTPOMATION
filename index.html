@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>InstaPost</title>
+
+<style>
+  body {
+    font-family: Arial;
+    background: #f0f2f5;
+    text-align: center;
+  }
+
+  .card {
+    background: white;
+    margin: 20px auto;
+    padding: 15px;
+    width: 360px;
+    border-radius: 10px;
+  }
+
+  .post {
+    background: white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+  }
+
+  img {
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  #feedContainer {
+    height: 400px;
+    overflow-y: auto;
+  }
+
+  .heart {
+    cursor: pointer;
+    font-size: 20px;
+    color: gray;
+  }
+
+  .liked {
+    color: red;
+  }
+</style>
+</head>
+
+<body>
+
+  <h2>InstaPost</h2>
+
+  <div class="card">
+    <input id="username" placeholder="Enter username">
+    <button id="loginBtn" onclick="login()">Login</button>
+  </div>
+
+  <div id="feed" style="display:none">
+
+    <div class="card">
+      <textarea id="postText"></textarea><br>
+      <input type="file" id="fileInput"><br>
+      <input id="dateInput" placeholder="Enter date"><br>
+      <button id="postBtn">Post</button>
+    </div>
+
+    <div id="count">Total Posts: 0</div>
+
+    <div id="feedContainer">
+      <div id="posts"></div>
+    </div>
+
+  </div>
+
+  <script>
+
+  let total = 0;
+
+  function login(){
+    document.getElementById("feed").style.display = "block";
+  }
+
+  document.getElementById("postBtn").onclick = function(){
+
+    let text = document.getElementById("postText").value.trim();
+    if(!text) return;
+
+    let user = document.getElementById("username").value;
+    let file = document.getElementById("fileInput").files[0];
+    let date = document.getElementById("dateInput").value;
+
+    let post = document.createElement("div");
+    post.className = "post";
+
+    let html = `
+      <strong>${user}</strong><br>
+      <small>Posted on: ${date}</small><br>
+      <p>${text}</p>
+    `;
+
+    if(file){
+      const imageUrl = URL.createObjectURL(file);
+      html += '<img src="' + imageUrl + '" />';
+    }
+
+    html += `
+      <br>
+      <span class="heart">♡</span>
+      <span class="count">0</span>
+    `;
+
+    post.innerHTML = html;
+
+    document.getElementById("posts").prepend(post);
+
+    total++;
+    document.getElementById("count").innerText = "Total Posts: " + total;
+
+    document.getElementById("postText").value = "";
+  };
+
+  document.addEventListener("click", function(e){
+
+    if(e.target.className === "heart"){
+      let count = e.target.nextElementSibling;
+
+      if(e.target.classList.contains("liked")){
+        e.target.classList.remove("liked");
+        e.target.innerText = "♡";
+        count.innerText = parseInt(count.innerText) - 1;
+      } else {
+        e.target.classList.add("liked");
+        e.target.innerText = "♥";
+        count.innerText = parseInt(count.innerText) + 1;
+      }
+    }
+  });
+
+  </script>
+
+</body>
+</html>
