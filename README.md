@@ -6,21 +6,30 @@ Node.js
 VS code
 Browsers : Chromium , firefox , WebKit
 Automation framework : Page Object Model
-#PROJECT STRUCTURE
-#SOCIALMEDIA/
-├── .github/
-│   └── workflows/
-│       └── playwright.yml          # CI/CD integration
-├── e2e/                             # Test Layer
-│   ├── example.spec.js
-│   └── social.spec.js               # End-to-end test cases
-├── pages/                           # Page Object Model
-│   ├── loginPage.js
-│   ├── postPage.js
-│   └── feedPage.js                  # Encapsulates UI actions
-├── index.html                       # Sample application UI
-├── playwright.config.js             # Framework configuration
-├── package.json                     # Dependencies & scripts
-└── .gitignore                       # Ignored files
-to run these files 
-in terminal type , npx playwright test e2e/social.spec.js --headed
+## 📂 Project Structure
+
+```text
+SOCIALMEDIA
+│
+├── .github
+│   └── workflows
+│       └── playwright.yml
+│
+├── e2e
+│   ├── TestLayer
+│   │   └── example.spec.js
+│   └── social.spec.js
+│
+├── pages
+│   ├── LoginPage.js
+│   ├── FeedPage.js
+│   └── PostPage.js
+│
+├── UI
+│   └── index.html
+│
+├── playwright.config.js
+├── package.json
+├── .gitignore
+└── README.md
+```
