@@ -7,7 +7,7 @@ VS code
 Browsers : Chromium , firefox , WebKit
 Automation framework : Page Object Model
 #PROJECT STRUCTURE
-SOCIALMEDIA/
+#SOCIALMEDIA/
 ├── .github/
 │   └── workflows/
 │       └── playwright.yml          # CI/CD integration
